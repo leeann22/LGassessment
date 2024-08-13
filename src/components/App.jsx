@@ -1,50 +1,39 @@
 import React, { useEffect, useState } from "react";
+import { Routes, Route } from 'react-router-dom';
 import { makeServer } from "../mock";
+import Sidebar from './Sidebar';
+import Posts from './Posts';
+import Details from './Details';
+import PostDetails from './PostDetails';
+
+import "./styles.scss";
 
 if (process.env.NODE_ENV === 'development') {
   makeServer();
 }
 
 function App() {
-
-  const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
-    fetch("/api/posts")
+    // Fetch categories from the API or define them statically
+    fetch("/api/categories")
       .then((response) => response.json())
-      .then((data) => {
-        if (data.posts) {
-          setPosts(data.posts);
-        } else {
-          console.error('Posts data is missing');
-        }
-      })
+      .then((data) => setCategories(data.categories))
       .catch((error) => console.error(error));
   }, []);
 
   return (
-    <div>
-      <h1>Posts</h1>
-      <ul>
-        {posts.length > 0 ? (
-          posts.map((post) => (
-            <li key={post.id}>
-              <h2>{post.title}</h2>
-              <p>{new Date(post.publishDate).toLocaleString()}</p>
-              <img src={post.author.avatar} alt={post.author.name} />
-              <p>{post.author.name}</p>
-              <p>{post.summary}</p>
-              <ul>
-                {post.categories.map((category) => (
-                  <li key={category.id}>{category.name}</li>
-                ))}
-              </ul>
-            </li>
-          ))
-        ) : (
-          <p>No posts available</p>
-        )}
-      </ul>
+    <div className="app">
+      <Sidebar categories={categories} onCategoryChange={setSelectedCategory} />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Posts selectedCategory={selectedCategory} />} />
+          <Route path="/posts/:postId" element={<PostDetails />} />
+          <Route path="/details" element={<Details />} />
+        </Routes>
+      </div>
     </div>
   );
 }
