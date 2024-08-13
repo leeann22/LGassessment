@@ -1,0 +1,140 @@
+div {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #304463;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  width: auto;
+}
+
+li {
+  border: 1px solid #304463; /* Add border to each post */
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px; /* Space inside the box */
+  margin-bottom: 16px; /* Space between boxes */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #FFF8DB; /* Background color */
+}
+
+h1 {
+  text-align: center;
+}
+
+.tags {
+  border: 1px solid #ccc; /* Add border to each post */
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px; /* Space inside the box */
+  margin-bottom: 16px; /* Space between boxes */
+  background-color: #FFC7ED; /* Background color */
+}
+
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background-color: #FFC7ED;
+  padding: 16px;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+}
+
+.profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+.author {
+  display: flex;
+  align-items: top;
+}
+
+.title {
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  line-height: 0.01;
+}
+
+#category-select {
+  margin-top: 16px;
+  padding: 8px;
+  width: 100%;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.category {
+  flex: 1;
+  margin-right: 8px;
+  border: 1px solid #304463; /* Add border to each post */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px; /* Space inside the box */
+  margin-bottom: 1px; /* Space between boxes */
+  background-color: #FFC7ED; /* Background color */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflowed content */
+  text-align: center; /* Center the text */
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the posts horizontally */
+  min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.post {
+  opacity: 0; /* Start with posts invisible */
+  animation-name: fadeIn; /* Apply the fade-in animation */
+  animation-duration: 1s; /* Duration of the animation */
+  animation-fill-mode: forwards; /* Keep the last keyframe */
+}
+
+.post.visible {
+  opacity: 1; /* Make posts visible */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.pagination button {
+  margin: 0 4px;
+  border-radius: 50px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #7D8ABC;
+  color: white;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #304463;
+}
+
+.pagination button:hover {
+  background-color: #304463;
+}

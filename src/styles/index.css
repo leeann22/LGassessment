@@ -1,4 +1,13 @@
 body {
+  /* Group 1 */
+
+  position: absolute;
+  width: 1280px;
+  height: 78px;
+  left: 0px;
+  top: 0px;
+
+
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -11,3 +20,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
