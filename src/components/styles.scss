@@ -1,0 +1,158 @@
+// Define variables for colors and common values
+$font-family-base: Arial, Helvetica, sans-serif;
+$text-color: #304463;
+$post-border-color: #304463;
+$post-background-color: #FFF8DB;
+$tags-background-color: #FFC7ED;
+$profile-size: 50px;
+$profile-border-radius: 50%;
+$post-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$post-border-radius: 8px;
+$post-padding: 16px;
+$post-margin-bottom: 16px;
+$post-margin-right: 16px;
+
+// Mixin for box shadows
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+// Base styles
+div {
+  font-family: $font-family-base;
+  color: $text-color;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  width: auto;
+}
+
+li {
+  border: 1px solid $post-border-color; // Add border to each post
+  @include box-shadow($post-shadow); // Apply box shadow mixin
+  border-radius: $post-border-radius; // Rounded corners
+  padding: $post-padding; // Space inside the box
+  margin-bottom: $post-margin-bottom; // Space between boxes
+  background-color: $post-background-color; // Background color
+}
+
+h1 {
+  text-align: center;
+}
+
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  padding: $post-padding;
+  margin-right: $post-margin-right;
+}
+
+.profile {
+  width: $profile-size;
+  height: $profile-size;
+  border-radius: $profile-border-radius;
+  object-fit: cover;
+  margin-right: $post-margin-right;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-weight: bold; 
+  display: flex;
+  flex-direction: column;
+  line-height: 0.01;
+}
+
+#category-select {
+  margin-top: $post-margin-bottom * .5; // Half the bottom margin of a post
+    padding: $post-padding / 2; // Half the padding of a post
+    border-radius: $post-border-radius; // Rounded corners
+    background-color: $post-background-color; // Background color
+    @include box-shadow($post-shadow);
+    cursor: pointer;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  margin-top: $post-margin-bottom * .5; // Half the bottom margin of a post
+}
+
+.category {
+    flex-grow: 1; // Shorthand for flex-grow property set to '1'
+    margin-right: $post-margin-right * 5; // Half the right margin of a post
+    border-radius: $post-border-radius * 5; // More rounded corners
+    @include box-shadow($post-shadow); // Apply box shadow mixin
+    padding-left: $post-padding; // Half the left padding of a post
+    margin-bottom: $post-margin-bottom / 5; // One-fifth of the bottom margin of a post
+    background-color: lighten($tags-background-color, .2); // Lighten the background color by .2 steps
+    white-space: nowrap; // Prevent text from wrapping
+    overflow: hidden; // Hide overflowed content
+    text-align: center; // Center the text
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the posts horizontally */
+    min-height: calc(100vh - ($post-padding * .5)); /* Ensure the container takes at least the full height of the viewport minus half the bottom padding */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.post {
+    width: 1000px; // Set a fixed width
+    height: 200px; // Set a fixed height
+    border: 1px solid $post-border-color; // Add border to each post
+    @include box-shadow($post-shadow); // Apply box shadow mixin
+    border-radius: $post-border-radius; // Rounded corners
+    padding: $post-padding; // Space inside the box
+    margin-bottom: $post-margin-bottom; // Space between boxes
+    background-color: $post-background-color; // Background color
+    opacity: inherit; /* Start with posts invisible */
+    animation-name: fadeIn; /* Apply the fade-in animation */
+    animation-duration: .5s; /* Duration of the animation */
+    animation-fill-mode: forwards; /* Keep the last keyframe */
+}
+
+.post.visible {
+    opacity: inherit; /* Make posts visible */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: $post-margin-bottom;
+    margin-bottom: $post-margin-bottom;
+  }
+  
+  .pagination button {
+    margin: 0 4px;
+    border-radius: 50px;
+    padding: 8px 16px;
+    border: none;
+    background-color: #7D8ABC;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background-color: #304463;
+  }
+  
+  .pagination button:hover {
+    background-color: #304463;
+  }
