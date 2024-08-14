@@ -7,6 +7,7 @@ function Posts({ selectedCategory }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsVisible, setPostsVisible] = useState(true);
   const postsPerPage = 3;
+  const [queryString, setQueryString] = useState(window.location.search);
 
   useEffect(() => {
     fetch("/api/posts")
@@ -20,6 +21,20 @@ function Posts({ selectedCategory }) {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  useEffect(() => {
+    // Update the URL with the current filter state
+    const newQueryString = `?category=${selectedCategory}`;
+    window.history.pushState({}, '', `${window.location.pathname}${newQueryString}`);
+    setQueryString(newQueryString);
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    const newQueryString = `?category=${selectedCategory}`;
+    window.history.pushState({}, '', `${window.location.pathname}${newQueryString}`);
+    setQueryString(newQueryString);
+  }, [selectedCategory]);
 
   const filteredPosts = selectedCategory.length > 0
   ? posts.filter(post => post.categories.some(category => selectedCategory.includes(category.name)))
