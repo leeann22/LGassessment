@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-function PostDetails({ postId }) {
+function PostDetails() {
+  const { postId } = useParams();
   const [postDetails, setPostDetails] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/posts/${postId}`)
+    fetch(`/api/posts/`)
       .then((response) => response.json())
       .then((data) => {
-        setPostDetails(data);
+        if (data.posts) {
+          setPostDetails(data.posts.find((post) => post.id === postId));
+        } else {
+          console.error('Posts data is missing');
+        }
       })
       .catch((error) => console.error('Error fetching post details:', error));
   }, [postId]);
@@ -18,14 +24,22 @@ function PostDetails({ postId }) {
 
   return (
     <div>
-      <h1>{postDetails.title}</h1>
-      <img src={postDetails.author.avatar} alt={postDetails.author.name} className="profile"/>
-      <p>{postDetails.author.name}</p>
-      <p>{postDetails.summary}</p>
       <ul>
-        {postDetails.categories.map((category) => (
-          <li key={category.id}>{category.name}</li>
-        ))}
+      <li key={postDetails.id}>
+        <div className="author">
+          <img src={postDetails.author.avatar} alt={postDetails.author.name} className="profile"/>
+          <div className="title">
+            <p>{postDetails.author.name} {new Date(postDetails.publishDate).toLocaleString()}</p>
+            <p>{postDetails.title}</p>
+          </div>
+        </div>
+          <p>{postDetails.summary}</p>
+          <div className="categories">
+            {postDetails.categories.map((category) => (
+              <li key={category.id} className="category">{category.name} </li>
+            ))}
+        </div>
+      </li>
       </ul>
     </div>
   );
