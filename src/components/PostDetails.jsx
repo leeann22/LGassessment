@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 function PostDetails() {
+  // Get the postId from the URL
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState(null);
 
   useEffect(() => {
+    // Fetch post details from the API
     fetch(`/api/posts/`)
       .then((response) => response.json())
       .then((data) => {
@@ -19,7 +21,7 @@ function PostDetails() {
   }, [postId]);
 
   if (!postDetails) {
-    return <p>Loading post details...</p>;
+    return <p>Loading post details...</p>; // Add a loading state
   }
 
   return (

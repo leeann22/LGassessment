@@ -5,11 +5,11 @@ function Sidebar({ categories, onCategoryChange }) {
   return (
     <div className="sidebar">
       <ul>
-        <Link to="/details"><li>Details</li></Link>
+        <Link to="/details"><li>Details</li></Link> // Add a link to the Details page
       </ul>
       <div>
         <label htmlFor="category-select">Filter by Category:</label>
-        <select id="category-select" onChange={(e) => onCategoryChange(e.target.value)}>
+        <select id="category-select" onChange={(e) => onCategoryChange(e.target.value)}> // add an onChange event listener to the select element
           <option value="">All Categories</option>
           <option value="Data Management">Data Management</option>
           <option value="Digital Marketing">Digital Marketing</option>

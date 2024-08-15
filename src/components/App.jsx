@@ -28,6 +28,7 @@ function App() {
     <div className="app">
       <Sidebar categories={categories} onCategoryChange={setSelectedCategory} />
       <div className="content">
+        // Add the Routes component to define the routes for the application
         <Routes>
           <Route path="/" element={<Posts selectedCategory={selectedCategory} />} />
           <Route path="/posts/:postId" element={<PostDetails />} />

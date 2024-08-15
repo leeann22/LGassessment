@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 
 function Posts({ selectedCategory }) {
+  // Define the initial state for posts and current page
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsVisible, setPostsVisible] = useState(true);
@@ -10,6 +11,7 @@ function Posts({ selectedCategory }) {
   const [queryString, setQueryString] = useState(window.location.search);
 
   useEffect(() => {
+    // Fetch posts from the API
     fetch("/api/posts")
       .then((response) => response.json())
       .then((data) => {
@@ -30,16 +32,19 @@ function Posts({ selectedCategory }) {
   }, [selectedCategory]);
 
   useEffect(() => {
+    // Update the URL with the current page state and ensure page is always at 1 when changing filters
     setCurrentPage(1);
     const newQueryString = `?category=${selectedCategory}`;
     window.history.pushState({}, '', `${window.location.pathname}${newQueryString}`);
     setQueryString(newQueryString);
   }, [selectedCategory]);
 
+  // Filter posts based on selected category
   const filteredPosts = selectedCategory.length > 0
   ? posts.filter(post => post.categories.some(category => selectedCategory.includes(category.name)))
   : posts;
 
+  // Paginate posts
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
@@ -47,6 +52,7 @@ function Posts({ selectedCategory }) {
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   
     const handleClick = (pageNumber) => {
+      // Update the current page state
       setCurrentPage(pageNumber);
       // Only toggle posts visibility when changing pages
       if (currentPage !== pageNumber) {
@@ -84,7 +90,7 @@ function Posts({ selectedCategory }) {
               </li>
             ))
           ) : (
-            <p>Loading posts...</p>
+            <p>Loading posts...</p> // Display a loading message when there are no posts
           )}
         </ul>
         <div className="pagination">
